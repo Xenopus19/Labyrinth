@@ -14,6 +14,16 @@ public class Field
 	{ 
 		CreateField(FieldSize, BrickDensity);
 	}
+	public Coordinates GetRandomTile()
+    {
+		Random random = new Random();
+
+		return new Coordinates(random.Next(FieldTiles.GetLength(0)), random.Next(FieldTiles.GetLength(0)));
+    }
+	public bool IsTileMoveable(Coordinates tileCoordinates)
+    {
+		return FieldTiles[tileCoordinates.X, tileCoordinates.Y] == FIELD_EMPTY_TILE;
+    }
 
 	public string[,] GetTiles()
     {
@@ -45,10 +55,12 @@ public class Field
 public class FieldDrawer
 {
 	private Field fieldToDraw;
+	private Player player;
 
-	public FieldDrawer(Field field)
+	public FieldDrawer(Field field, Player player)
     {
 		fieldToDraw = field;
+		this.player = player;
     }
 
 	public void CleanField()
@@ -64,7 +76,14 @@ public class FieldDrawer
 		{
 			for (int j = 0; j < tiles.GetLength(0); j++)
 			{
-				Console.Write(" " + tiles[i, j]);
+				if(player.GetCoordinates().X == i && player.GetCoordinates().Y == j)
+                {
+					Console.WriteLine(" " + "K");
+                }
+				else
+                {
+					Console.Write(" " + tiles[i, j]);
+				}
 			}
 			Console.WriteLine("");
 		}

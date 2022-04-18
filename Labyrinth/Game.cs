@@ -10,13 +10,14 @@ public class Game
 	private Player player;
 	public Game()
 	{
-		player = new Player();
+		
 		field = new Field(10, 15);
-		fieldDrawer = new FieldDrawer(field);
+		player = new(field);
+		fieldDrawer = new FieldDrawer(field, player);
 		while (true)
         {
 			fieldDrawer.DrawField();
-			player.MakeMovenemt();
+			player.WaitForControls();
 			//fieldDrawer.CleanField();
         }
 	}
