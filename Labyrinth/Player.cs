@@ -2,19 +2,20 @@
 
 namespace Labyrinth;
 
-public class Player
+public class Player : Object
 {
 	private InputController inputController;
-	private Field field;
+	//private Field field;
 
-	private Coordinates coordinates;
+	//private Coordinates coordinates;
 	public Player(Field field)
 	{
+		Symbol = "K";
 		this.field = field;
 		inputController = new InputController(this);
-		SpawnPlayer();
+		RandomSpawn();
 	}
-	public Coordinates GetCoordinates() => coordinates;
+	
 
 	public void WaitForControls()
     {
@@ -29,7 +30,7 @@ public class Player
 			coordinates = newCoordinates; 
     }
 
-	private void SpawnPlayer()
+	/*private void SpawnPlayer()
     {
 		Random random = new Random(); 
 		bool IsSpawned = false;
@@ -42,12 +43,12 @@ public class Player
 				IsSpawned = true;
             }
         }
-    }
+    }*/
 }
 
 public class InputController
 {
-	private readonly Player player;
+	private Player player;
 	public InputController(Player player)
     {
 		this.player = player;
@@ -57,21 +58,21 @@ public class InputController
     {
 		string Control = Console.ReadLine();
 
-		if(Control == "W" && Control == "w")
+		if(Control == "W" || Control == "w")
         {
-			player.Move(0, -1);
-        }
-		else if (Control == "A" && Control == "a")
-		{
 			player.Move(-1, 0);
-		}
-		else if (Control == "S" && Control == "s")
+        }
+		else if (Control == "A" || Control == "a")
 		{
-			player.Move(0, 1);
+			player.Move(0, -1);
 		}
-		else if (Control == "D" && Control == "d")
+		else if (Control == "S" || Control == "s")
 		{
 			player.Move(1, 0);
+		}
+		else if (Control == "D" || Control == "d")
+		{
+			player.Move(0, 1);
 		}
 	}
 }
@@ -91,6 +92,15 @@ public struct Coordinates
 
 		return Sum;
     }
+	public static bool operator ==(Coordinates a, Coordinates b)
+	{
+		return a.X == b.X && a.Y == b.Y;
+	}
+
+	public static bool operator !=(Coordinates a, Coordinates b)
+	{
+		return !(a.X == b.X && a.Y == b.Y);
+	}
 
 	public int X;
 	public int Y;

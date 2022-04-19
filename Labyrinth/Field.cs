@@ -22,7 +22,25 @@ public class Field
     }
 	public bool IsTileMoveable(Coordinates tileCoordinates)
     {
+		if(!TileExists(tileCoordinates))
+        {
+			return false;
+        }
 		return FieldTiles[tileCoordinates.X, tileCoordinates.Y] == FIELD_EMPTY_TILE;
+    }
+
+	private bool TileExists(Coordinates tileCoordinates)
+    {
+		if (tileCoordinates.X > FieldTiles.GetLength(0)-1 || tileCoordinates.Y > FieldTiles.GetLength(0)-1)
+        {
+			return false;
+		}
+		else if(tileCoordinates.X < 0 || tileCoordinates.Y < 0)
+        {
+			return false;
+        }
+
+		return true;
     }
 
 	public string[,] GetTiles()
@@ -52,40 +70,3 @@ public class Field
 	}
 }
 
-public class FieldDrawer
-{
-	private Field fieldToDraw;
-	private Player player;
-
-	public FieldDrawer(Field field, Player player)
-    {
-		fieldToDraw = field;
-		this.player = player;
-    }
-
-	public void CleanField()
-    {
-		Console.Clear();
-    }
-
-	public void DrawField()
-    {
-		string[,] tiles = fieldToDraw.GetTiles();
-
-		for (int i = 0; i < tiles.GetLength(0); i++)
-		{
-			for (int j = 0; j < tiles.GetLength(0); j++)
-			{
-				if(player.GetCoordinates().X == i && player.GetCoordinates().Y == j)
-                {
-					Console.WriteLine(" " + "K");
-                }
-				else
-                {
-					Console.Write(" " + tiles[i, j]);
-				}
-			}
-			Console.WriteLine("");
-		}
-	}
-}
