@@ -4,6 +4,7 @@ namespace Labyrinth;
 public abstract class Object
 {
 	public string Symbol;
+	public ConsoleColor color = ConsoleColor.White;
 
 	public Coordinates coordinates;
 	public Field field;

@@ -7,6 +7,7 @@ public class Exit : Object
 	public Exit(Field field, Player player)
 	{
 		Symbol = "X";
+		color = ConsoleColor.Green;
 		this.field = field;
 		this.player = player;
 		RandomSpawn();

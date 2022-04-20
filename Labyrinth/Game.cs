@@ -14,13 +14,10 @@ public class Game
 	
 	public Game()
 	{
+		CreateGameElements();
+		InitGraphics();
 		
-		field = new Field(10, 15);
-		player = new(field);
-		exit = new Exit(field, player);
-		InitDrawableObjects();
-		fieldDrawer = new FieldDrawer(field, player);
-		while (!exit.PlayerReachedExit())
+		while (!GameEndConditionReached())
         {
 			fieldDrawer.DrawField(DrawableObjects);
 			player.WaitForControls();
@@ -29,11 +26,25 @@ public class Game
 		FinishGame();
 	}
 
-	private void InitDrawableObjects()
+	private void CreateGameElements()
+    {
+		field = new Field(10, 15);
+		player = new(field);
+		exit = new Exit(field, player);
+	}
+
+	private void InitGraphics()
 	{
 		DrawableObjects = new List<Object>();
 		DrawableObjects.Add(player);
 		DrawableObjects.Add(exit);
+		fieldDrawer = new FieldDrawer(field, player);
+	}
+
+	private bool GameEndConditionReached()
+    {
+		return exit.PlayerReachedExit();
+
 	}
 
 	private void FinishGame()

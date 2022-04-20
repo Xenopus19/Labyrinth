@@ -22,14 +22,6 @@ public class FieldDrawer
 		{
 			for (int j = 0; j < tiles.GetLength(0); j++)
 			{
-				/*if(player.GetCoordinates().X == i && player.GetCoordinates().Y == j)
-                {
-					Console.Write(" " + "K");
-                }
-				else
-                {
-					Console.Write(" " + tiles[i, j]);
-				}*/
 				DrawTile(i, j, tiles, drawableObjects);
 			}
 			Console.WriteLine("");
@@ -42,12 +34,23 @@ public class FieldDrawer
 		{
 			if (obj.GetCoordinates().X == X && obj.GetCoordinates().Y == Y)
 			{
-				Console.Write(" " + obj.Symbol);
+				DrawElement(obj.Symbol, obj.color);
 				return;
 			}
 		}
 
-		Console.Write(" " + tiles[X, Y]);
+		DrawElement(tiles[X, Y]);
+	}
+
+	private void DrawElement(string Symbol, ConsoleColor color)
+    {
+		Console.ForegroundColor = color;
+		Console.Write(" " + Symbol);
+		Console.ForegroundColor= ConsoleColor.White;
+    }
+	private void DrawElement(string Symbol)
+	{
+		Console.Write(" " + Symbol);
 	}
 
 	public void DrawGameFinish()

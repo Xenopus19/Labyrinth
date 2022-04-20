@@ -5,11 +5,10 @@ namespace Labyrinth;
 public class Player : Object
 {
 	private InputController inputController;
-	//private Field field;
 
-	//private Coordinates coordinates;
 	public Player(Field field)
 	{
+		color = ConsoleColor.DarkMagenta;
 		Symbol = "K";
 		this.field = field;
 		inputController = new InputController(this);
@@ -29,53 +28,8 @@ public class Player : Object
 		if(field.IsTileMoveable(newCoordinates))
 			coordinates = newCoordinates; 
     }
-
-	/*private void SpawnPlayer()
-    {
-		Random random = new Random(); 
-		bool IsSpawned = false;
-		while(!IsSpawned)
-        {
-			Coordinates randomTileCoordinates = field.GetRandomTile();
-			if(field.IsTileMoveable(randomTileCoordinates))
-            {
-				coordinates = randomTileCoordinates;
-				IsSpawned = true;
-            }
-        }
-    }*/
 }
 
-public class InputController
-{
-	private Player player;
-	public InputController(Player player)
-    {
-		this.player = player;
-    }
-
-	public void GetControls()
-    {
-		string Control = Console.ReadLine();
-
-		if(Control == "W" || Control == "w")
-        {
-			player.Move(-1, 0);
-        }
-		else if (Control == "A" || Control == "a")
-		{
-			player.Move(0, -1);
-		}
-		else if (Control == "S" || Control == "s")
-		{
-			player.Move(1, 0);
-		}
-		else if (Control == "D" || Control == "d")
-		{
-			player.Move(0, 1);
-		}
-	}
-}
 
 public struct Coordinates
 {
