@@ -6,6 +6,7 @@ public class Player : Object
 {
 	private InputController inputController;
 
+	private int JumpAmount;
 	public Player(Field field) : base(field)
 	{
 		color = ConsoleColor.DarkMagenta;
@@ -20,12 +21,31 @@ public class Player : Object
 		inputController.GetControls();
     }
 
+	public void AddJumps(int Amount)
+	{
+		JumpAmount += Amount;
+	}
+
 	public void Move(int deltaX, int deltaY)
     {
 		Coordinates newCoordinates = coordinates + new Coordinates(deltaX, deltaY);
 
-		if(field.IsTileMoveable(newCoordinates))
-			coordinates = newCoordinates; 
+		if (!field.TileExists(newCoordinates)) return;
+
+		if (JumpAmount > 0 && !field.IsTileMoveable(newCoordinates))
+        {
+			JumpOnTile(newCoordinates);
+        }
+		else if(field.IsTileMoveable(newCoordinates))
+        {
+			coordinates = newCoordinates;
+        }
+    }
+
+	private void JumpOnTile(Coordinates newCoordinates)
+    {
+		JumpAmount--;
+		coordinates = newCoordinates;
     }
 }
 

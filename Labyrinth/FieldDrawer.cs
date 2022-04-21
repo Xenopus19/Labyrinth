@@ -32,7 +32,7 @@ public class FieldDrawer
 	{
 		foreach (Object obj in DrawableObjects)
 		{
-			if (obj.GetCoordinates().X == X && obj.GetCoordinates().Y == Y)
+			if (obj.GetCoordinates().X == X && obj.GetCoordinates().Y == Y && obj.IsActive)
 			{
 				DrawElement(obj.Symbol, obj.color);
 				return;

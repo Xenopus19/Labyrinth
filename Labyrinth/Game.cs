@@ -9,6 +9,8 @@ public class Game
 	private FieldDrawer fieldDrawer;
 	private Player player;
 	private Exit exit;
+	private Jetpack jetpack1;
+	private Jetpack jetpack2;
 
 	private List<Object> DrawableObjects;
 	
@@ -21,6 +23,8 @@ public class Game
         {
 			fieldDrawer.DrawField(DrawableObjects);
 			player.WaitForControls();
+			jetpack1.CheckPlayerPosition();
+			jetpack2.CheckPlayerPosition();
         }
 
 		FinishGame();
@@ -31,6 +35,8 @@ public class Game
 		field = new Field(10, 15);
 		player = new(field);
 		exit = new Exit(field, player);
+		jetpack1 = new(field, player);
+		jetpack2 = new(field, player);
 	}
 
 	private void InitGraphics()
@@ -38,6 +44,8 @@ public class Game
 		DrawableObjects = new List<Object>();
 		DrawableObjects.Add(player);
 		DrawableObjects.Add(exit);
+		DrawableObjects.Add(jetpack2);
+		DrawableObjects.Add(jetpack1);
 		fieldDrawer = new FieldDrawer(field, player);
 	}
 

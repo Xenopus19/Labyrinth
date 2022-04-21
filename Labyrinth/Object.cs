@@ -9,6 +9,8 @@ public abstract class Object
 	public Coordinates coordinates;
 	public Field field;
 
+	public bool IsActive = true;
+
 	public Object(Field field)
     {
 		this.field = field;
