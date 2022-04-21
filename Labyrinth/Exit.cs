@@ -4,11 +4,10 @@ namespace Labyrinth;
 public class Exit : Object
 {
 	private Player player;
-	public Exit(Field field, Player player)
+	public Exit(Field field, Player player) : base(field)
 	{
 		Symbol = "X";
 		color = ConsoleColor.Green;
-		this.field = field;
 		this.player = player;
 		RandomSpawn();
 	}

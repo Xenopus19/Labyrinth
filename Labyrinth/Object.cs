@@ -9,6 +9,11 @@ public abstract class Object
 	public Coordinates coordinates;
 	public Field field;
 
+	public Object(Field field)
+    {
+		this.field = field;
+    }
+
 	public void RandomSpawn()
 	{
 		Random random = new Random();

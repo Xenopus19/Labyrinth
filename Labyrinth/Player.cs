@@ -6,11 +6,10 @@ public class Player : Object
 {
 	private InputController inputController;
 
-	public Player(Field field)
+	public Player(Field field) : base(field)
 	{
 		color = ConsoleColor.DarkMagenta;
 		Symbol = "K";
-		this.field = field;
 		inputController = new InputController(this);
 		RandomSpawn();
 	}
@@ -33,6 +32,8 @@ public class Player : Object
 
 public struct Coordinates
 {
+	public int X;
+	public int Y;
 	public Coordinates(int X, int Y)
     {
 		this.X = X;
@@ -54,8 +55,5 @@ public struct Coordinates
 	public static bool operator !=(Coordinates a, Coordinates b)
 	{
 		return !(a.X == b.X && a.Y == b.Y);
-	}
-
-	public int X;
-	public int Y;
+	}	
 }

@@ -29,7 +29,7 @@ public class Field
 		return FieldTiles[tileCoordinates.X, tileCoordinates.Y] == FIELD_EMPTY_TILE;
     }
 
-	private bool TileExists(Coordinates tileCoordinates)
+	public bool TileExists(Coordinates tileCoordinates)
     {
 		if (tileCoordinates.X > FieldTiles.GetLength(0)-1 || tileCoordinates.Y > FieldTiles.GetLength(0)-1)
         {
@@ -69,4 +69,5 @@ public class Field
 		return tile;
 	}
 }
+
 
