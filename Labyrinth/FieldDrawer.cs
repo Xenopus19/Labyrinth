@@ -13,7 +13,7 @@ public class FieldDrawer
 		this.player = player;
 	}
 
-	public void DrawField(List<Object> drawableObjects)
+	public void DrawField()
 	{
 		Console.Clear();
 		Tile[,] tiles = fieldToDraw.GetTiles();
@@ -31,7 +31,7 @@ public class FieldDrawer
 	private void DrawTile(Tile tile)
 	{
 		Object tileObject = tile.GetObject();
-		if(tileObject != null)
+		if(tileObject != null && tileObject.IsActive)
         {
 			DrawElement(tileObject.Symbol, tileObject.color);
         }

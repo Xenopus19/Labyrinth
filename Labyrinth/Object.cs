@@ -39,7 +39,7 @@ public abstract class Object
 
 		if(currentTile!=null)
         {
-			currentTile.ClearObject();
+			currentTile.ClearObject(this);
         }
 
 		currentTile = field.GetTile(coordinates);

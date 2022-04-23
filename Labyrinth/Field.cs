@@ -76,27 +76,29 @@ public class Field
 
 public class Tile
 {
-	private Object OnTileObject;
+	private List<Object> OnTileObjects;
 	public string FieldPart;
 
 	public Tile(int ChanceToBeBrick)
     {
+		OnTileObjects = new List<Object>();
 		SetFieldPart(ChanceToBeBrick);
     }
 
 	public void SetObject(Object newObject)
     {
-		OnTileObject = newObject;
+		OnTileObjects.Add(newObject);
     }
 
-	public void ClearObject()
+	public void ClearObject(Object objectToClean)
     {
-		OnTileObject = null;
+		OnTileObjects.Remove(objectToClean);
     }
 
 	public Object GetObject()
     {
-		return OnTileObject;
+		if(OnTileObjects.Count == 0) return null;
+		return OnTileObjects.Last();
     }
 
 	private void SetFieldPart(int ChanceToBeBrick)
