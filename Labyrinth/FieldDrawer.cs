@@ -16,30 +16,29 @@ public class FieldDrawer
 	public void DrawField(List<Object> drawableObjects)
 	{
 		Console.Clear();
-		string[,] tiles = fieldToDraw.GetTiles();
+		Tile[,] tiles = fieldToDraw.GetTiles();
 
 		for (int i = 0; i < tiles.GetLength(0); i++)
 		{
 			for (int j = 0; j < tiles.GetLength(1); j++)
 			{
-				DrawTile(i, j, tiles, drawableObjects);
+				DrawTile(tiles[i, j]);
 			}
 			Console.WriteLine("");
 		}
 	}
 
-	private void DrawTile(int X, int Y, string[,] tiles, List<Object> DrawableObjects)
+	private void DrawTile(Tile tile)
 	{
-		foreach (Object obj in DrawableObjects)
-		{
-			if (obj.GetCoordinates().X == X && obj.GetCoordinates().Y == Y && obj.IsActive)
-			{
-				DrawElement(obj.Symbol, obj.color);
-				return;
-			}
-		}
-
-		DrawElement(tiles[X, Y]);
+		Object tileObject = tile.GetObject();
+		if(tileObject != null)
+        {
+			DrawElement(tileObject.Symbol, tileObject.color);
+        }
+		else
+        {
+			DrawElement(tile.FieldPart);
+        }
 	}
 
 	private void DrawElement(string Symbol, ConsoleColor color)

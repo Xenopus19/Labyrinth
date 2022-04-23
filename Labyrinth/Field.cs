@@ -4,10 +4,10 @@ namespace Labyrinth;
 
 public class Field
 {
-	private const string FIELD_EMPTY_TILE = " ";
-	private const string FIELD_BRICK_TILE = "#";
+	public static string FIELD_EMPTY_TILE = " ";
+	public static string FIELD_BRICK_TILE = "#";
 
-	private string[,] FieldTiles;
+	private Tile[,] FieldTiles;
 
 
 	public Field(int FieldSize, int BrickDensity)
@@ -26,7 +26,7 @@ public class Field
         {
 			return false;
         }
-		return FieldTiles[tileCoordinates.X, tileCoordinates.Y] == FIELD_EMPTY_TILE;
+		return FieldTiles[tileCoordinates.X, tileCoordinates.Y].FieldPart == FIELD_EMPTY_TILE;
     }
 
 	public bool TileExists(Coordinates tileCoordinates)
@@ -43,31 +43,68 @@ public class Field
 		return true;
     }
 
-	public string[,] GetTiles()
+	public Tile StandOnTile(Coordinates tileCoordinates, Object newObject)
+    {
+		Tile tile = FieldTiles[tileCoordinates.X, tileCoordinates.Y];
+		tile.SetObject(newObject);
+		return tile;
+    }
+
+	public Tile[,] GetTiles()
     {
 		return FieldTiles;
     }
 
+	public Tile GetTile(Coordinates coordinates)
+	{
+		return FieldTiles[coordinates.X, coordinates.Y];
+	}
+
+
 	private void CreateField(int FieldSize, int BrickDensity)
     {
-		FieldTiles = new string[FieldSize, FieldSize];
+		FieldTiles = new Tile[FieldSize, FieldSize];
 		for (int i = 0; i < FieldSize; i++)
 		{
 			for (int j = 0; j < FieldSize; j++)
 			{
-				FieldTiles[i, j] = GenerateTile(BrickDensity);
+				FieldTiles[i, j] = new(BrickDensity);
 			}
 		}
 	}
+}
 
-	private string GenerateTile(int ChanceToBeBrick)
+public class Tile
+{
+	private Object OnTileObject;
+	public string FieldPart;
+
+	public Tile(int ChanceToBeBrick)
     {
+		SetFieldPart(ChanceToBeBrick);
+    }
+
+	public void SetObject(Object newObject)
+    {
+		OnTileObject = newObject;
+    }
+
+	public void ClearObject()
+    {
+		OnTileObject = null;
+    }
+
+	public Object GetObject()
+    {
+		return OnTileObject;
+    }
+
+	private void SetFieldPart(int ChanceToBeBrick)
+	{
 		Random random = new Random();
 		int Chance = random.Next(100);
 
-		string tile = Chance<=ChanceToBeBrick ? FIELD_BRICK_TILE : FIELD_EMPTY_TILE;
-		return tile;
+		FieldPart = Chance <= ChanceToBeBrick ? Field.FIELD_BRICK_TILE : Field.FIELD_EMPTY_TILE;
 	}
 }
-
 

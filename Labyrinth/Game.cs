@@ -52,7 +52,6 @@ public class Game
 	private bool GameEndConditionReached()
     {
 		return exit.PlayerReachedExit();
-
 	}
 
 	private void FinishGame()

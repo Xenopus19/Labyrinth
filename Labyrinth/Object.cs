@@ -8,6 +8,7 @@ public abstract class Object
 
 	public Coordinates coordinates;
 	public Field field;
+	private Tile currentTile;
 
 	public bool IsActive = true;
 
@@ -25,10 +26,23 @@ public abstract class Object
 			Coordinates randomTileCoordinates = field.GetRandomTile();
 			if (field.IsTileMoveable(randomTileCoordinates))
 			{
-				coordinates = randomTileCoordinates;
+				StandOnTile(randomTileCoordinates);
 				IsSpawned = true;
 			}
 		}
 	}
+
+	public void StandOnTile(Coordinates TileCoordinates)
+    {
+		field.StandOnTile(TileCoordinates, this);
+		coordinates = TileCoordinates;
+
+		if(currentTile!=null)
+        {
+			currentTile.ClearObject();
+        }
+
+		currentTile = field.GetTile(coordinates);
+    }
 	public Coordinates GetCoordinates() => coordinates;
 }

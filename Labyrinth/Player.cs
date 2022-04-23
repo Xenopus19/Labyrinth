@@ -38,14 +38,14 @@ public class Player : Object
         }
 		else if(field.IsTileMoveable(newCoordinates))
         {
-			coordinates = newCoordinates;
+			StandOnTile(newCoordinates);
         }
     }
 
 	private void JumpOnTile(Coordinates newCoordinates)
     {
 		JumpAmount--;
-		coordinates = newCoordinates;
+		StandOnTile(newCoordinates);
     }
 }
 
