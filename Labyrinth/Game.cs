@@ -7,7 +7,8 @@ public class Game
 {
 	private Field field;
 	private FieldDrawer fieldDrawer;
-	private Player player;
+	private Player player1;
+	private Player player2;
 	private Exit exit;
 	private Jetpack jetpack1;
 	private Jetpack jetpack2;
@@ -20,7 +21,7 @@ public class Game
 		while (!GameEndConditionReached())
         {
 			fieldDrawer.DrawField();
-			player.WaitForControls();
+			player1.WaitForControls();
 			jetpack1.CheckPlayerPosition();
 			jetpack2.CheckPlayerPosition();
         }
@@ -31,15 +32,15 @@ public class Game
 	private void CreateGameElements()
     {
 		field = new Field(10, 15);
-		player = new(field);
-		exit = new Exit(field, player);
-		jetpack1 = new(field, player);
-		jetpack2 = new(field, player);
+		player1 = new(field, "K");
+		exit = new Exit(field);
+		jetpack1 = new(field);
+		jetpack2 = new(field);
 	}
 
 	private void InitGraphics()
 	{
-		fieldDrawer = new FieldDrawer(field, player);
+		fieldDrawer = new FieldDrawer(field);
 	}
 
 	private bool GameEndConditionReached()

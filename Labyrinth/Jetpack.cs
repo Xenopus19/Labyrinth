@@ -4,24 +4,22 @@ namespace Labyrinth;
 
 public class Jetpack : Object
 {
-	private Player player;
 	private int ChanceToBeUpgraded = 50;
 	private int JumpsAmount = 1;
-	public Jetpack(Field field, Player player) : base(field)
+	public Jetpack(Field field) : base(field)
 	{
-		this.player = player;
 		SetValues();
 		RandomSpawn();
 	}
 
 	public void CheckPlayerPosition()
     {
-		if (player.GetCoordinates() == coordinates && IsActive)
+		Player player = (Player)currentTile.FindObjectOfType<Player>();
+		if(player!=null)
         {
 			player.AddJumps(JumpsAmount);
 			IsActive = false;
-		}
-			
+        }
     }
 
 	private void SetValues()

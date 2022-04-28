@@ -8,7 +8,7 @@ public abstract class Object
 
 	public Coordinates coordinates;
 	public Field field;
-	private Tile currentTile;
+	private protected Tile currentTile;
 
 	public bool IsActive = true;
 

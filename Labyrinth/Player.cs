@@ -7,10 +7,10 @@ public class Player : Object
 	private InputController inputController;
 
 	private int JumpAmount;
-	public Player(Field field) : base(field)
+	public Player(Field field, string symbol) : base(field)
 	{
 		color = ConsoleColor.DarkMagenta;
-		Symbol = "K";
+		Symbol = symbol;
 		inputController = new InputController(this);
 		RandomSpawn();
 	}

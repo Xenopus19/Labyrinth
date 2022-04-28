@@ -3,18 +3,16 @@
 namespace Labyrinth;
 public class Exit : Object
 {
-	private Player player;
-	public Exit(Field field, Player player) : base(field)
+	public Exit(Field field) : base(field)
 	{
 		Symbol = "X";
 		color = ConsoleColor.Green;
-		this.player = player;
 		RandomSpawn();
 	}
 
 	public bool PlayerReachedExit()
     {
-		return player.GetCoordinates() == coordinates;
+		return currentTile.FindObjectOfType<Player>() != null;
     }
 
 } 

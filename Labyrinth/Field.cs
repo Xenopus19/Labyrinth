@@ -85,6 +85,15 @@ public class Tile
 		SetFieldPart(ChanceToBeBrick);
     }
 
+	public Object FindObjectOfType<ObjectType>()
+    {
+		foreach(Object obj in OnTileObjects)
+        {
+			if(obj is ObjectType) return obj;
+        }
+		return null;
+    }
+
 	public void SetObject(Object newObject)
     {
 		OnTileObjects.Add(newObject);

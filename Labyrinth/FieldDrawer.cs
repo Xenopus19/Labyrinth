@@ -4,13 +4,11 @@ namespace Labyrinth;
 public class FieldDrawer
 {
 	private Field fieldToDraw;
-	private Player player;
 
-	public FieldDrawer(Field field, Player player)
+	public FieldDrawer(Field field)
 	{
 
 		fieldToDraw = field;
-		this.player = player;
 	}
 
 	public void DrawField()
