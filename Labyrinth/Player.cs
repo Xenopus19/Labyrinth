@@ -7,18 +7,18 @@ public class Player : Object
 	private InputController inputController;
 
 	private int JumpAmount;
-	public Player(Field field, string symbol) : base(field)
+	public Player(Field field, string symbol, ConsoleColor Color, PlayerControls controls) : base(field)
 	{
-		color = ConsoleColor.DarkMagenta;
+		color = Color;
 		Symbol = symbol;
-		inputController = new InputController(this);
+		inputController = new InputController(this, controls);
 		RandomSpawn();
 	}
 	
 
 	public void WaitForControls()
     {
-		inputController.GetControls();
+		inputController.ControlPlayer();
     }
 
 	public void AddJumps(int Amount)

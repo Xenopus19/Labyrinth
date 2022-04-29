@@ -5,8 +5,8 @@ public class Exit : Object
 {
 	public Exit(Field field) : base(field)
 	{
-		Symbol = "X";
-		color = ConsoleColor.Green;
+		Symbol = "E";
+		color = ConsoleColor.DarkBlue;
 		RandomSpawn();
 	}
 
